@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="description" content="A site about Wiguna R, skills, portfolio, and contact">
+    <title>Wiguna R - Portfolio</title>
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-mousewheel@3.1.13/jquery.mousewheel.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.js"></script>
+    <link href="https://unpkg.com/jquery.terminal/css/jquery.terminal.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/js-polyfills/keyboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jcubic/static/js/wcwidth.js"></script>
+    <script>
+        /*!
+ * jQuery plugin for converting HTML tables into ASCII representation
+ *
+ * Version: 0.3.0 (Jan 2013)
+ *
+ * Copyright 2011-2012, Vladimir Kostyukov http://vkostyukov.ru
+ * License: http://www.apache.org/licenses/LICENSE-2.0.html
+ * Project page: https://github.com/vkostyukov/jquery-ascii
+ */
+        (function ($) {
+            $.fn.ascii = function(format) {
+                var newline = "<br/>";
+                var space = "&nbsp;";
+
+                if (format === "raw") {
+                    newline = "\n";
+                    space = " ";
+                }
+
+                if (!this.is("table")) {
+                    return "+----------------------------+"
+                        + newline + "| Source isn't a html table. |" + newline
+                        + "+----------------------------+";
+                }
+
+                var data = [];
+                var lengths = [];
+                var header = -1;
+
+                var row = 0, column = 0;
+                this.find("tr").each(function() {
+                    var line = data[row] || [];
+                    column = 0;
+                    $(this).find("td,th").each(function() {
+                        var span = {
+                            row: parseInt($(this).attr("rowspan")) || 1,
+                            col: parseInt($(this).attr("colspan")) || 1
+                        };
+
+                        while(line[column]) column++;
+
+                        for (var i = column; i < column + span.col; i++) {
+                            line[i] = $(this).html();
+
+                            if (lengths[i] === undefined
+                                || $(this).html().length > lengths[i]) {
+                                lengths[i] = $(this).html().length;
+                            }
+
+                            for (var j = row + 1; j < row + span.row; j++) {
+                                var next = data[j] || [];
+                                next[i] = $(this).html();
+                                data[j] = next;
+                            }
+                        }
+
+                        column += span.col;
+                    });
+
+                    data[row] = line;
+
+                    if ($(this).find("th").length > 0) {
+                        header = row + 1;
+                    }
+
+                    row++;
+                });
+
+                var repeat = function(string, times) {
+                    if (times > 0) return new Array(times + 1).join(string);
+                    return "";
+                };
+
+                var process = function(row, total) {
+                    var typed = 0;
+                    var result = "";
+                    for (var cell in row) {
+                        var align = 1 + lengths[cell] - row[cell].length
+                        typed += 2 + row[cell].length + align;
+                        result += " " + row[cell] + repeat(space, align);
+                    }
+
+                    if (typed < total - 1) {
+                        result += " " + repeat(space, total - typed - 1);
+                    }
+
+                    return result + "" + newline;
+                };
+
+                var total = lengths.length - 1;
+                for(var length in lengths) {
+                    total += lengths[length] + 2;
+                }
+
+                var out = "" + repeat("", total) + "" + newline;
+                for (var row in data) {
+                    if (row === header) {
+                        out += "" + repeat("", total) + "" + newline;
+                    }
+                    out += process(data[row], total);
+                }
+
+                out += "" + repeat("", total) + "" + newline;
+
+                return out;
+            };
+        }) (jQuery);
+
+    </script>
+</head>
+<body>
+    <table id="table" style="display: none">
+    </table>
+</body>
+
+<script>
+
+    var term;
+    var data = [
+        {
+            name: "Pulsa Elektronix",
+            desc: "A simple CRUD application system using Java Swing",
+            link: "https://github.com/zombozo12/Pulsa-Elektronix"
+        },
+        {
+            name: "sysbook",
+            desc: "A simple Book Rent Management System using Java Swing and MySQL with Dynamic Pages",
+            link: "https://github.com/zombozo12/sysbook"
+        },
+        {
+            name: "Beevention",
+            desc: "",
+            link: ""
+        },
+        {
+            name: "Elux Android",
+            desc: "",
+            link: ""
+        },
+        {
+            name: "EvilBOT",
+            desc: "",
+            link: ""
+        },
+        {
+            name: "Rajamandala - Posyantekdes Institution",
+            desc: "A Company Website about Posyantekdes Institution provides " +
+                "technical services, information, and orientation of " +
+                "various types of appropriate technology.",
+            link: "https://posyantekdes-ikhlasramaku.com/"
+        },
+        {
+            name: "IoT Native",
+            desc: "",
+            link: ""
+        },
+        {
+            name: "MeSport",
+            desc: "",
+            link: ""
+        },
+        {
+            name: "Diklinik Web",
+            desc: "",
+            link: "https://diklinik.com/"
+        },
+        {
+            name: "Diklinik Android",
+            desc: "",
+            link: ""
+        },
+        {
+            name: "Kegunung",
+            desc: "",
+            link: "https://kegunung.com/"
+        }
+    ];
+
+    var skills = [
+        {
+            name: "HTML/CSS",
+            amount: 7
+        },
+        {
+            name: "Javascript/Jquery",
+            amount: 7
+        },
+        {
+            name: "Java",
+            amount: 9
+        },
+        {
+            name: "PHP",
+            amount: 9
+        },
+        {
+            name: "Laravel",
+            amount: 9
+        },
+        {
+            name: "Android",
+            amount: 9
+        },
+        {
+            name: "MySQL",
+            amount: 9
+        },
+        {
+            name: "Firebase",
+            amount: 7
+        },
+        {
+            name: "Git",
+            amount: 9
+        },
+        {
+            name: "Adobe XD",
+            amount: 9
+        },
+        {
+            name: "Communication",
+            amount: 9
+        },
+        {
+            name: "Team Work",
+            amount: 9
+        }
+    ];
+
+    jQuery(function($) {
+
+
+        var help = "Usage: \n" +
+            "\thelp\t\tIt shows this message\n" +
+            "\tabout\t\tShows a little about me\n" +
+            "\tcontact\t\tList of my social media and email\n" +
+            "\tportfolio\tList of my finished projects\n" +
+            "\tskills\t\tList of my skills";
+
+        var welcome_message = "Welcome to my simple website";
+        term = $('body').terminal(function(command, term) {
+            if (command === 'help') {
+                term.echo(help);
+            } else if (command === 'about') {
+                term.echo('Experienced Software Engineering for 3+ years by learning autodidact, school, and college. \n' +
+                    'My primary skills are PHP and Java (Website Development and Android Development), APIs, and Web Cyber Security.');
+            } else if(command === 'contact'){
+                term.echo('' +
+                    'LinkedIn\thttps://linkedin.com/in/wigunarrr\n' +
+                    'Facebook\thttps://facebook.com/wigunaramadhan\n' +
+                    'Github\t\thttps://github.com/zombozo12\n' +
+                    'Email\t\twigunaramadhan1998@gmail.com');
+            } else if(command === 'portfolio') {
+                for(var i = 0; i < data.length; i++){
+                    term.echo("● " + (data[i].name ? data[i].name + "\n" : "") + (data[i].desc ? data[i].desc + "\n" : "") + (data[i].link ? data[i].link + "\n" : ""));
+                }
+            } else if(command === 'skills') {
+                for(var j = 0; j < skills.length; j++){
+                    $("#table").append("<tr>" +
+                        "<td>" + skills[j].name + "</td>" +
+                        "<td>" + "█".repeat(skills[j].amount) + "</td>" +
+                        "<td>" + skills[j].amount*10 + "%" + "</td>" +
+                        "</tr>"
+                    );
+                }
+                var res = $("#table").ascii("raw");
+                term.echo(res);
+            }else {
+                term.echo("unknown command " + command);
+            }
+        }, {
+            greetings:
+                " __          ___                           _____  \n" +
+                " \\ \\        / (_)                         |  __ \\ \n" +
+                "  \\ \\  /\\  / / _  __ _ _   _ _ __   __ _  | |__) |\n" +
+                "   \\ \\/  \\/ / | |/ _` | | | | '_ \\ / _` | |  _  / \n" +
+                "    \\  /\\  /  | | (_| | |_| | | | | (_| | | | \\ \\ \n" +
+                "     \\/  \\/   |_|\\__, |\\__,_|_| |_|\\__,_| |_|  \\_\\\n" +
+                "                  __/ |                           \n" +
+                "                 |___/                            \n" +
+                "\n" +
+                welcome_message + "\n" +
+                help,
+            prompt: "visitor@wigunarrr.dev # ",
+            onBlur: function() {
+                // prevent loosing focus
+                return false;
+            }
+        });
+    });
+
+</script>
+</html>
