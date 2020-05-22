@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="description" content="A simple website about me, my projects, skills, and, contact">
+    <title>Wiguna R - Portfolio</title>
+
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-mousewheel@3.1.13/jquery.mousewheel.min.js"></script>
+    <script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.js"></script>
+    <link href="https://unpkg.com/jquery.terminal/css/jquery.terminal.css" rel="stylesheet"/>
+    <script src="https://unpkg.com/js-polyfills/keyboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/jcubic/static/js/wcwidth.js"></script>
+
+</head>
+<body>
+
+</body>
+
+<script>
+
+    var term;
+
+    var motd =
+        "  _  _    ___ ____  \n" +
+        " | || |  / _ \\___ \\ \n" +
+        " | || |_| | | |__) |\n" +
+        " |__   _| | | |__ < \n" +
+        "    | | | |_| |__) |\n" +
+        "    |_|  \\___/____/ \n" +
+        "                    \n" +
+        "                    \n" +
+        "You shall not pass? This path is forbidden!\n";
+
+    jQuery(function($) {
+
+
+        var help = "Usage: \n" +
+            "\tback\t\tGo back to homepage\n";
+
+        term = $('body').terminal(function(command, term) {
+            if (command === 'back') {
+                window.location = "/index.html";
+            } else {
+                term.echo("unknown command " + command);
+            }
+        }, {
+            greetings:
+                motd + "\n" +
+                help,
+            prompt: "visitor@wigunarrr.dev # ",
+            onBlur: function() {
+                // prevent loosing focus
+                return false;
+            }
+        });
+    });
+
+</script>
+</html>

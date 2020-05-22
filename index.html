@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name=viewport content="width=device-width, initial-scale=1">
-    <meta name="description" content="A site about Wiguna R, skills, portfolio, and contact">
-    <title>Wiguna R - Portfolio</title>
+    <meta name="description" content="A simple website about me, my projects, skills, and, contact">
+    <title>Wiguna R - Portfolio</title> 
 
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-mousewheel@3.1.13/jquery.mousewheel.min.js"></script>
@@ -124,8 +124,8 @@
     </script>
 </head>
 <body>
-    <table id="table" style="display: none">
-    </table>
+<table id="table" style="display: none">
+</table>
 </body>
 
 <script>
@@ -134,13 +134,13 @@
     var data = [
         {
             name: "Pulsa Elektronix",
-            desc: "A simple CRUD application system using Java Swing",
-            link: "https://github.com/zombozo12/Pulsa-Elektronix"
+            desc: "\tA simple CRUD application system using Java Swing",
+            link: "\thttps://github.com/zombozo12/Pulsa-Elektronix"
         },
         {
             name: "sysbook",
-            desc: "A simple Book Rent Management System using Java Swing and MySQL with Dynamic Pages",
-            link: "https://github.com/zombozo12/sysbook"
+            desc: "\tA simple Book Rent Management System using Java Swing and MySQL with Dynamic Pages",
+            link: "\thttps://github.com/zombozo12/sysbook"
         },
         {
             name: "Beevention",
@@ -159,10 +159,10 @@
         },
         {
             name: "Rajamandala - Posyantekdes Institution",
-            desc: "A Company Website about Posyantekdes Institution provides " +
+            desc: "\tA Company Website about Posyantekdes Institution provides " +
                 "technical services, information, and orientation of " +
                 "various types of appropriate technology.",
-            link: "https://posyantekdes-ikhlasramaku.com/"
+            link: "\thttps://posyantekdes-ikhlasramaku.com/"
         },
         {
             name: "IoT Native",
@@ -177,7 +177,7 @@
         {
             name: "Diklinik Web",
             desc: "",
-            link: "https://diklinik.com/"
+            link: "\thttps://diklinik.com/"
         },
         {
             name: "Diklinik Android",
@@ -187,7 +187,7 @@
         {
             name: "Kegunung",
             desc: "",
-            link: "https://kegunung.com/"
+            link: "\thttps://kegunung.com/"
         }
     ];
 
@@ -242,17 +242,6 @@
         }
     ];
 
-    var motd =
-        " __          ___                           _____  \n" +
-        " \\ \\        / (_)                         |  __ \\ \n" +
-        "  \\ \\  /\\  / / _  __ _ _   _ _ __   __ _  | |__) |\n" +
-        "   \\ \\/  \\/ / | |/ _` | | | | '_ \\ / _` | |  _  / \n" +
-        "    \\  /\\  /  | | (_| | |_| | | | | (_| | | | \\ \\ \n" +
-        "     \\/  \\/   |_|\\__, |\\__,_|_| |_|\\__,_| |_|  \\_\\\n" +
-        "                  __/ |                           \n" +
-        "                 |___/                            \n" +
-        "\n";
-
     jQuery(function($) {
 
 
@@ -261,7 +250,9 @@
             "\tabout\t\tShows a little about me\n" +
             "\tcontact\t\tList of my social media and email\n" +
             "\tportfolio\tList of my finished projects\n" +
-            "\tskills\t\tList of my skills";
+            "\tskills\t\tList of my skills\n" +
+            "\tping\t\tPong!\n" +
+            "\tclear\t\tClear the terminal";
 
         var welcome_message = "Welcome to my simple website";
         term = $('body').terminal(function(command, term) {
@@ -293,12 +284,22 @@
                 term.echo(res);
             } else if(command === 'clear'){
                 term.clear();
+            } else if(command === 'ping'){
+                term.echo("pong!");
             }else {
                 term.echo("unknown command " + command);
             }
         }, {
             greetings:
-                motd +
+                " __          ___                           _____  \n" +
+                " \\ \\        / (_)                         |  __ \\ \n" +
+                "  \\ \\  /\\  / / _  __ _ _   _ _ __   __ _  | |__) |\n" +
+                "   \\ \\/  \\/ / | |/ _` | | | | '_ \\ / _` | |  _  / \n" +
+                "    \\  /\\  /  | | (_| | |_| | | | | (_| | | | \\ \\ \n" +
+                "     \\/  \\/   |_|\\__, |\\__,_|_| |_|\\__,_| |_|  \\_\\\n" +
+                "                  __/ |                           \n" +
+                "                 |___/                            \n" +
+                "\n" +
                 welcome_message + "\n" +
                 help,
             prompt: "visitor@wigunarrr.dev # ",
