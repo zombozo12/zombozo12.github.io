@@ -242,6 +242,17 @@
         }
     ];
 
+    var motd =
+        " __          ___                           _____  \n" +
+        " \\ \\        / (_)                         |  __ \\ \n" +
+        "  \\ \\  /\\  / / _  __ _ _   _ _ __   __ _  | |__) |\n" +
+        "   \\ \\/  \\/ / | |/ _` | | | | '_ \\ / _` | |  _  / \n" +
+        "    \\  /\\  /  | | (_| | |_| | | | | (_| | | | \\ \\ \n" +
+        "     \\/  \\/   |_|\\__, |\\__,_|_| |_|\\__,_| |_|  \\_\\\n" +
+        "                  __/ |                           \n" +
+        "                 |___/                            \n" +
+        "\n";
+
     jQuery(function($) {
 
 
@@ -280,23 +291,17 @@
                 }
                 var res = $("#table").ascii("raw");
                 term.echo(res);
+            } else if(command === 'clear'){
+                term.clear();
             }else {
                 term.echo("unknown command " + command);
             }
         }, {
             greetings:
-                " __          ___                           _____  \n" +
-                " \\ \\        / (_)                         |  __ \\ \n" +
-                "  \\ \\  /\\  / / _  __ _ _   _ _ __   __ _  | |__) |\n" +
-                "   \\ \\/  \\/ / | |/ _` | | | | '_ \\ / _` | |  _  / \n" +
-                "    \\  /\\  /  | | (_| | |_| | | | | (_| | | | \\ \\ \n" +
-                "     \\/  \\/   |_|\\__, |\\__,_|_| |_|\\__,_| |_|  \\_\\\n" +
-                "                  __/ |                           \n" +
-                "                 |___/                            \n" +
-                "\n" +
+                motd +
                 welcome_message + "\n" +
                 help,
-            prompt: "visitor@zombozo12.github.io # ",
+            prompt: "visitor@wigunarrr.dev # ",
             onBlur: function() {
                 // prevent loosing focus
                 return false;
